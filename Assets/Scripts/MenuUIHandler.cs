@@ -43,12 +43,12 @@ public class MenuUIHandler : MonoBehaviour
     public void SetPlayerName()
     {
         DataManager.Instance.currentPlayerName = playerNameField.GetComponent<TMP_InputField>().text;
+        DataManager.Instance.Save();
         DisplayGameMenu();
     }
 
     public void QuitGame()
     {
-        DataManager.Instance.Save();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
