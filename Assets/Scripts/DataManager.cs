@@ -4,7 +4,7 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
-    public string currentPlayerName = "";
+    public string currentPlayerName;
     public int highScore;
 
     private void Awake()
