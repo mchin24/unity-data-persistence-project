@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -45,6 +46,11 @@ public class MenuUIHandler : MonoBehaviour
         DataManager.Instance.currentPlayerName = playerNameField.GetComponent<TMP_InputField>().text;
         DataManager.Instance.Save();
         DisplayGameMenu();
+    }
+
+    public void StartNewGame()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
