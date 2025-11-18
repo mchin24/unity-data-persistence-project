@@ -6,7 +6,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public string currentPlayerName;
-    public int highScore;
+    private GameScore[] _highScores = new GameScore[10];
 
     private void Awake()
     {
@@ -25,7 +25,24 @@ public class DataManager : MonoBehaviour
     {
         public string currentPlayerName;
     }
+
+    [Serializable]
+    public class GameScore
+    {
+        public int score;
+        public string playerName;
+    }
+
+    public void AddScore(int score, string playerName)
+    {
+        
+    }
     
+    public GameScore[] GetHighScores()
+    {
+        return _highScores;
+    }
+
     public void Save()
     {
         SaveData data = new SaveData();
@@ -37,6 +54,13 @@ public class DataManager : MonoBehaviour
     
     public void Load()
     {
+        // Set initial values
+        currentPlayerName = "";
+        for (int i = 0; i < _highScores.Length; i++)
+        {
+            _highScores[i] = new GameScore{playerName = "AAA", score = 0};
+        }
+        
         if (File.Exists(Application.persistentDataPath + "/savedata.json"))
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/savedata.json");

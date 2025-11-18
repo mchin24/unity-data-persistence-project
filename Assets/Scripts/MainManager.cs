@@ -44,7 +44,7 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update() 
     {
         if (!m_Started)
         {
@@ -76,6 +76,10 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (DataManager.Instance != null)
+        {
+            DataManager.Instance.AddScore(m_Points, DataManager.Instance.currentPlayerName);
+        }
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
