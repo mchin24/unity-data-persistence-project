@@ -19,13 +19,7 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Load();
     }
-
-    [Serializable]
-    class SaveData
-    {
-        public string currentPlayerName;
-    }
-
+    
     [Serializable]
     public class GameScore
     {
@@ -43,6 +37,13 @@ public class DataManager : MonoBehaviour
         return _highScores;
     }
 
+
+    [Serializable]
+    class SaveData
+    {
+        public string currentPlayerName;
+    }
+    
     public void Save()
     {
         SaveData data = new SaveData();
