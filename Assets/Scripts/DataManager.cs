@@ -69,9 +69,11 @@ public class DataManager : MonoBehaviour
     
     public void Save()
     {
-        SaveData data = new SaveData();
-        data.currentPlayerName = currentPlayerName;
-        data.highScores = _highScores;
+        SaveData data = new SaveData
+        {
+            currentPlayerName = currentPlayerName,
+            highScores = _highScores
+        };
             
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
