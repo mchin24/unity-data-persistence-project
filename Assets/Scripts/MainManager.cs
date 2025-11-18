@@ -14,6 +14,7 @@ public class MainManager : MonoBehaviour
     public Text BestScoreText;
     public Text NameText;
     public GameObject GameOverText;
+    public DataManager.GameScore bestScore;
     
     private bool m_Started = false;
     private int m_Points;
@@ -27,7 +28,7 @@ public class MainManager : MonoBehaviour
         if (DataManager.Instance != null)
         {
             NameText.text = "Player : " + DataManager.Instance.currentPlayerName;
-            DataManager.GameScore bestScore = DataManager.Instance.GetHighScores()[0];
+            bestScore = DataManager.Instance.GetHighScores()[0];
             BestScoreText.text = "Best Score : " + bestScore.playerName + " : " + bestScore.score;
         }
         
@@ -75,6 +76,11 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+
+        if (m_Points > bestScore.score)
+        {
+            BestScoreText.text = $"Best Score : {DataManager.Instance.currentPlayerName} : {m_Points}";
+        }
     }
 
     public void GameOver()
