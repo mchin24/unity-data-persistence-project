@@ -74,7 +74,7 @@ public class MainManager : MonoBehaviour
         // Return to the main menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("menu");
         }
     }
 
