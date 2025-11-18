@@ -50,8 +50,6 @@ public class DataManager : MonoBehaviour
             // Then insert the new score
             _highScores[insertIndex] = new GameScore{playerName = playerName, score = score};
         }
-        
-        _highScores[0] = new GameScore{playerName = playerName, score = score};
     }
     
     public GameScore[] GetHighScores()
