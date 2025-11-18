@@ -29,7 +29,29 @@ public class DataManager : MonoBehaviour
 
     public void AddScore(int score, string playerName)
     {
+        // Find the correct place to insert the new score
+        int insertIndex = -1;
+        for (int i = 0; i < _highScores.Length; i++)
+        {
+            if (score > _highScores[i].score)
+            {
+                insertIndex = i;
+            }
+        }
         
+        if (insertIndex > -1)
+        {
+            // Move all other scores down
+            for (int i = _highScores.Length - 1; i > insertIndex; i--)
+            {
+                _highScores[i] = _highScores[i - 1];
+            }
+            
+            // Then insert the new score
+            _highScores[insertIndex] = new GameScore{playerName = playerName, score = score};
+        }
+        
+        _highScores[0] = new GameScore{playerName = playerName, score = score};
     }
     
     public GameScore[] GetHighScores()
@@ -42,12 +64,14 @@ public class DataManager : MonoBehaviour
     class SaveData
     {
         public string currentPlayerName;
+        public GameScore[] highScores;
     }
     
     public void Save()
     {
         SaveData data = new SaveData();
         data.currentPlayerName = currentPlayerName;
+        data.highScores = _highScores;
             
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
@@ -56,10 +80,10 @@ public class DataManager : MonoBehaviour
     public void Load()
     {
         // Set initial values
-        currentPlayerName = "";
+        currentPlayerName = "Default";
         for (int i = 0; i < _highScores.Length; i++)
         {
-            _highScores[i] = new GameScore{playerName = "AAA", score = 0};
+            _highScores[i] = new GameScore{playerName = currentPlayerName, score = 0};
         }
         
         if (File.Exists(Application.persistentDataPath + "/savedata.json"))
@@ -67,6 +91,7 @@ public class DataManager : MonoBehaviour
             string json = File.ReadAllText(Application.persistentDataPath + "/savedata.json");
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             currentPlayerName = data.currentPlayerName;
+            _highScores = data.highScores;
         }
     }
 }
