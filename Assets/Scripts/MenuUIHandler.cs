@@ -13,6 +13,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public GameObject playerNameField;
     public GameObject currentPlayerName;
+    public GameObject bestScoreText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +38,8 @@ public class MenuUIHandler : MonoBehaviour
     public void DisplayGameMenu()
     {
         currentPlayerName.GetComponent<TMP_Text>().text = "Player: " + DataManager.Instance.currentPlayerName;
+        DataManager.GameScore bestScore = DataManager.Instance.GetHighScores()[0];
+        bestScoreText.GetComponent<TMP_Text>().text = $"Best Score : {bestScore.playerName} : {bestScore.score}";
         playerNameContainer.SetActive(false);
         menuContainer.SetActive(true);
     }
