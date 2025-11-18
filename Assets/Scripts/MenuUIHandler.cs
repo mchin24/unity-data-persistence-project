@@ -56,6 +56,11 @@ public class MenuUIHandler : MonoBehaviour
         SceneManager.LoadScene("main");
     }
 
+    public void ShowScores()
+    {
+        SceneManager.LoadScene("scores");
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
