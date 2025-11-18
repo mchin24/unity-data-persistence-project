@@ -36,6 +36,7 @@ public class DataManager : MonoBehaviour
             if (score > _highScores[i].score)
             {
                 insertIndex = i;
+                break;
             }
         }
         
@@ -49,6 +50,9 @@ public class DataManager : MonoBehaviour
             
             // Then insert the new score
             _highScores[insertIndex] = new GameScore{playerName = playerName, score = score};
+
+            // Then save
+            Save();
         }
     }
     

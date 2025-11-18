@@ -27,7 +27,8 @@ public class MainManager : MonoBehaviour
         if (DataManager.Instance != null)
         {
             NameText.text = "Player : " + DataManager.Instance.currentPlayerName;
-            
+            DataManager.GameScore bestScore = DataManager.Instance.GetHighScores()[0];
+            BestScoreText.text = "Best Score : " + bestScore.playerName + " : " + bestScore.score;
         }
         
         const float step = 0.6f;
@@ -86,7 +87,6 @@ public class MainManager : MonoBehaviour
             {
                 Debug.Log((i + 1) + ". " + highScores[i].playerName + " : " + highScores[i].score);
             }
-            DataManager.Instance.Save();
         }
         m_GameOver = true;
         GameOverText.SetActive(true);
