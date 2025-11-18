@@ -10,6 +10,7 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Awake");
         if (Instance != null)
         {
             Destroy(gameObject);
